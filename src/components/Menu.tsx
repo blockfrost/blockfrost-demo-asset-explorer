@@ -1,11 +1,6 @@
 import React from "react";
-import { useRouter } from "next/router";
-import { IoCubeOutline } from "react-icons/io5";
-import { Nav } from "react-bootstrap";
 import Link from "next/link";
-import { X, Box, Package, Archive } from "react-feather";
-import { FaHashtag } from "react-icons/fa";
-import Skeleton from "react-loading-skeleton";
+import { X } from "react-feather";
 
 function Menu() {
   return (

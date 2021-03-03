@@ -21,10 +21,6 @@ class MainDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <script
-            id="ze-snippet"
-            src="https://static.zdassets.com/ekr/snippet.js?key=a0ff99fa-0608-4825-b70d-16a2cd918a39"
-          ></script>
         </body>
       </Html>
     );

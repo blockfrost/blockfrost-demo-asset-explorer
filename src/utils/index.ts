@@ -1,3 +1,11 @@
-import routes from "utils/routes";
+import { Headers } from "types";
 
-export { routes };
+export const getHeaders = (projectId?: string): Headers | null => {
+  if (!projectId) {
+    return null;
+  }
+
+  return {
+    project_id: projectId,
+  };
+};

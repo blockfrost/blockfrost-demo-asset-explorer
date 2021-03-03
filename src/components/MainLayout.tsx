@@ -2,7 +2,12 @@ import React, { FunctionComponent } from "react";
 import { Header, Footer } from "components";
 import Head from "next/head";
 
-const MainLayout: FunctionComponent<LayoutProps> = ({
+interface Props {
+  children?: JSX.Element[] | JSX.Element;
+  title: string;
+}
+
+const MainLayout: FunctionComponent<Props> = ({
   children,
   title,
 }): JSX.Element => {

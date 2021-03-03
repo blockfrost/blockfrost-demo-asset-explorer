@@ -1,11 +1,8 @@
-import { Plan } from "types/Plans";
+export interface Headers {
+  project_id: string;
+}
 
-export interface Props {
-  selectedPlanName: Plan["name"];
-  subscriptionId: string;
-  selectProduct: (name: string | null) => void;
-  updateSubscription: (
-    subscriptionId: string,
-    selectedPlanName: string
-  ) => void;
+export interface Asset {
+  asset: string;
+  quantity: string;
 }

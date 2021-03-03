@@ -1,11 +1,8 @@
 import React from "react";
 import { Navbar } from "react-bootstrap";
-import { Menu } from "components";
 import Link from "next/link";
 import { Menu as MenuIcon } from "react-feather";
-import Skeleton from "react-loading-skeleton";
-import { IoCubeOutline } from "react-icons/io5";
-import { FaHashtag } from "react-icons/fa";
+import { FaHashtag, FaGithub } from "react-icons/fa";
 
 function Header() {
   return (
@@ -15,14 +12,17 @@ function Header() {
           <MenuIcon />
         </a>
       </Link>
-      <Navbar className="navbar-brand">
+      <Navbar className="navbar-brand d-flex align-items-center">
         <Link href="/" passHref>
           <a className="pt-1">
             <img width="160px" src="/images/logo.svg" />
           </a>
         </Link>
+        <div className="title">
+          <div className="text">Demo Asset Explorer</div>
+        </div>
       </Navbar>
-      <Menu />
+
       <div className="navbar-right" style={{ width: 400 }}>
         <a href="https://docs.blockfrost.io/" target="_blank" rel="noreferrer">
           <button className="btn btn-sm pd-x-15 btn-uppercase mg-l-5 d-flex">
@@ -32,7 +32,22 @@ function Header() {
             documentation
           </button>
         </a>
+        <a
+          href="https://github.com/blockfrost/blockfrost-demo-asset-explorer"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <FaGithub size={30} />
+        </a>
       </div>
+      <style jsx>{`
+        .title {
+          margin-top: 2px;
+          padding-left: 20px;
+          display: flex;
+          align-items: center;
+        }
+      `}</style>
     </header>
   );
 }

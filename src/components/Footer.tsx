@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="footer d-flex align-items-start">
+    <footer className="footer d-flex align-items-end">
       <div className="d-flex flex-column" style={{ height: 70 }}>
         <div>
           <strong>Blockfrost.io</strong>, Five Binaries OÜ, Sepapaja 6, 11415

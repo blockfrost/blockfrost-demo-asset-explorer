@@ -1,12 +1,17 @@
 import React, { ReactElement } from "react";
 import { Container } from "react-bootstrap";
-import { MainLayout, FAQ, Pricing, Introduction } from "components";
+import { MainLayout, Assets } from "components";
 
 function Index(): ReactElement {
   return (
     <MainLayout title="Blockfrost.io">
-      <div className="100-vw">
-        <Container className="content-fixed">aaa</Container>
+      <div
+        className="100-vw"
+        style={{ height: "100%", display: "flex", flex: 1 }}
+      >
+        <Container className="content-fixed">
+          <Assets />
+        </Container>
       </div>
     </MainLayout>
   );
