@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Header } from "./Header";
 import { Body } from "./Body";
 import { hexToString, getFingerprint } from "utils";
@@ -13,7 +13,12 @@ import Skeleton from "react-loading-skeleton";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 function Assets() {
-  const { assets, isAssetsError, isAssetsLoading } = useAssets();
+  const [page, setPage] = useState(1);
+  const [hasNext, setHasNext] = useState(true);
+  const { assets, isAssetsError, isAssetsLoading, hasNextPage } = useAssets(
+    page
+  );
+
   const ContextAwareToggle = ({
     eventKey,
     callback,
@@ -56,16 +61,16 @@ function Assets() {
 
   const ContextAwareContent = ({
     eventKey,
-    policyId,
+    asset,
   }: {
     eventKey: string;
-    policyId: string;
+    asset: string;
   }) => {
     const currentEventKey = useContext(AccordionContext);
     const isCurrentEventKey = currentEventKey === eventKey;
 
     if (isCurrentEventKey) {
-      return <Body policyId={policyId} />;
+      return <Body assetId={asset} />;
     } else {
       return <div />;
     }
@@ -73,7 +78,37 @@ function Assets() {
 
   return (
     <div className="wrapper">
-      <h3 className="my-3">Cardano Assets</h3>
+      <div className="main-header p-3">
+        <div className="main-header-left">
+          <h3>Cardano Assets</h3>
+        </div>
+        <div className="main-header-right">
+          <button
+            onClick={async () => {
+              const nextPage = page - 1;
+              const hasNext = await hasNextPage(nextPage);
+              setHasNext(hasNext);
+              setPage(nextPage);
+            }}
+            disabled={page === 1}
+            className="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5"
+          >
+            previous page
+          </button>
+          <button
+            onClick={async () => {
+              const nextPage = page + 1;
+              const hasNext = await hasNextPage(nextPage);
+              setHasNext(hasNext);
+              setPage(nextPage);
+            }}
+            disabled={!hasNext}
+            className="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5"
+          >
+            next page
+          </button>
+        </div>
+      </div>
       <Accordion>
         {isAssetsLoading && (
           <div className="mt-2">
@@ -94,7 +129,7 @@ function Assets() {
             return (
               <Card key={asset.asset} className="mb-2">
                 <Card.Header className="d-flex">
-                  <div className="header">
+                  <div className="line-header">
                     <div className="left">
                       <ContextAwareToggle eventKey={asset.asset} />
                     </div>
@@ -110,7 +145,7 @@ function Assets() {
                 <Accordion.Collapse eventKey={asset.asset}>
                   <Card.Body>
                     <ContextAwareContent
-                      policyId={policyId}
+                      asset={asset.asset}
                       eventKey={asset.asset}
                     />
                   </Card.Body>
@@ -123,7 +158,15 @@ function Assets() {
         .wrapper {
           margin: 50px 0;
         }
-        .header {
+        .main-header {
+          display: flex;
+          justify-content: space-between;
+        }
+        .main-header-left {
+        }
+        .main-header-right {
+        }
+        .line-header {
           display: flex;
           flex-direction: row;
           align-items: center;
