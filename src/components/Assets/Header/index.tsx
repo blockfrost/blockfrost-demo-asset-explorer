@@ -1,14 +1,17 @@
 import React from "react";
 import { Asset } from "types";
-import { hexToString } from "utils";
+import { hexToString, getFingerprint } from "utils";
 
 interface Props {
   asset: Asset;
 }
 
 function Header({ asset }: Props) {
-  const assetNameInHex = asset.asset.slice(56);
+  const policyIdSize = 56;
+  const assetNameInHex = asset.asset.slice(policyIdSize);
+  const policyId = asset.asset.substr(asset.asset.length - policyIdSize);
   const assetName = hexToString(assetNameInHex);
+  const fingerprint = getFingerprint(policyId, assetNameInHex);
 
   return (
     <div className="d-flex">
@@ -22,6 +25,18 @@ function Header({ asset }: Props) {
           <div className="d-flex align-items-end justify-content-between mg-b-5">
             <h5 className="tx-normal tx-rubik lh-2 mg-b-0 text-truncate">
               {assetName}
+            </h5>
+          </div>
+        </div>
+        <div className="column column-fingerprint">
+          <div className="d-flex align-items-center justify-content-between mg-b-5">
+            <h6 className="tx-uppercase tx-10 tx-spacing-1 tx-color-02 tx-semibold mg-b-0">
+              Fingerprint
+            </h6>
+          </div>
+          <div className="d-flex align-items-end justify-content-between mg-b-5">
+            <h5 className="tx-normal tx-rubik lh-2 mg-b-0 text-truncate text-monospace">
+              {fingerprint}
             </h5>
           </div>
         </div>
@@ -46,6 +61,16 @@ function Header({ asset }: Props) {
           margin-top: 2px;
           width: 100%;
           justify-content: space-between;
+        }
+        .column-name {
+          min-width: 180px;
+          max-width: 200px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .column-fingerprint {
+          max-width: 480px;
         }
         .left {
           flex: 1;

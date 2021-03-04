@@ -21,8 +21,8 @@ export const hexToString = (input: string) => {
   return str;
 };
 
-export const getFingerprint = (policy_id: string, assetName?: string) =>
+export const getFingerprint = (policyId: string, assetName?: string) =>
   new EmurgoCip(
-    Uint8Array.from(Buffer.from(policy_id, "hex")),
+    Uint8Array.from(Buffer.from(policyId, "hex")),
     Uint8Array.from(Buffer.from(assetName ? assetName : "", "hex"))
-  );
+  ).fingerprint();

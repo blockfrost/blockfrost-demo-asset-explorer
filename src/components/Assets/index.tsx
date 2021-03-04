@@ -71,39 +71,38 @@ function Assets() {
     }
   };
 
-  if (isAssetsLoading || !assets || isAssetsError) {
-    return (
-      <div className="mt-2">
-        <Skeleton count={50} width="100%" height={77} />
-      </div>
-    );
-  }
-
   return (
     <div className="wrapper">
       <h3 className="my-3">Cardano Assets</h3>
       <Accordion>
-        {assets.map((asset) => {
-          return (
-            <Card key={asset.asset} className="mb-2">
-              <Card.Header className="d-flex">
-                <div className="header">
-                  <div className="left">
-                    <ContextAwareToggle eventKey={asset.asset} />
+        {isAssetsLoading && (
+          <div className="mt-2">
+            <Skeleton count={50} width="100%" height={77} />
+          </div>
+        )}
+        {!isAssetsLoading &&
+          !isAssetsError &&
+          assets.map((asset) => {
+            return (
+              <Card key={asset.asset} className="mb-2">
+                <Card.Header className="d-flex">
+                  <div className="header">
+                    <div className="left">
+                      <ContextAwareToggle eventKey={asset.asset} />
+                    </div>
+                    <div className="right">
+                      <Header asset={asset} />
+                    </div>
                   </div>
-                  <div className="right">
-                    <Header asset={asset} />
-                  </div>
-                </div>
-              </Card.Header>
-              <Accordion.Collapse eventKey={asset.asset}>
-                <Card.Body>
-                  <ContextAwareContent asset={asset} eventKey={asset.asset} />
-                </Card.Body>
-              </Accordion.Collapse>
-            </Card>
-          );
-        })}
+                </Card.Header>
+                <Accordion.Collapse eventKey={asset.asset}>
+                  <Card.Body>
+                    <ContextAwareContent asset={asset} eventKey={asset.asset} />
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            );
+          })}
       </Accordion>
       <style jsx>{`
         .wrapper {
@@ -120,15 +119,6 @@ function Assets() {
         }
         .right {
           width: 100%;
-        }
-
-        @media screen and (max-width: 1102px) {
-          .wrapper {
-            flex-direction: column-reverse;
-          }
-          .left {
-            margin-right: 0;
-          }
         }
       `}</style>
     </div>
