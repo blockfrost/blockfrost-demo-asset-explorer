@@ -25,4 +25,14 @@ export interface UseAssetResponse {
   isAssetError: boolean;
 }
 
+export interface UseAssetMinHistoryResponse {
+  assetMintHistory: {
+    action: string;
+    amount: string;
+    tx_hash: string;
+  }[];
+  isAssetMintHistoryLoading: boolean;
+  isAssetMintHistoryError: boolean;
+}
+
 export type Order = "asc" | "desc";

@@ -1,7 +1,12 @@
 import axios from "axios";
 import useSWR from "swr";
 import { getHeaders } from "utils";
-import { UseAssetsResponse, UseAssetResponse, Order } from "types";
+import {
+  UseAssetsResponse,
+  UseAssetResponse,
+  Order,
+  UseAssetMinHistoryResponse,
+} from "types";
 import { API_URL } from "const";
 
 export function useAssets(page: number, order: Order): UseAssetsResponse {
