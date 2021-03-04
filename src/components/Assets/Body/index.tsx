@@ -31,7 +31,7 @@ function Body({ assetId }: Props) {
           </div>
           <div className="d-flex align-items-end justify-content-end mg-b-5">
             <h5 className="tx-normal tx-rubik lh-2 mg-b-0 text-truncate">
-              {asset.asset_name}
+              {asset ? asset.asset_name : ""}
             </h5>
           </div>
         </div>
