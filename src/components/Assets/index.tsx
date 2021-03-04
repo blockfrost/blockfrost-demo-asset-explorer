@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Header } from "./Header";
 import { Body } from "./Body";
-import { Asset } from "types";
+import { hexToString, getFingerprint } from "utils";
 import { useAssets } from "hooks/useAssets";
 import {
   Accordion,
@@ -56,16 +56,16 @@ function Assets() {
 
   const ContextAwareContent = ({
     eventKey,
-    asset,
+    policyId,
   }: {
     eventKey: string;
-    asset: Asset;
+    policyId: string;
   }) => {
     const currentEventKey = useContext(AccordionContext);
     const isCurrentEventKey = currentEventKey === eventKey;
 
     if (isCurrentEventKey) {
-      return <Body asset={asset} />;
+      return <Body policyId={policyId} />;
     } else {
       return <div />;
     }
@@ -83,6 +83,14 @@ function Assets() {
         {!isAssetsLoading &&
           !isAssetsError &&
           assets.map((asset) => {
+            const policyIdSize = 56;
+            const assetNameInHex = asset.asset.slice(policyIdSize);
+            const policyId = asset.asset.substr(
+              asset.asset.length - policyIdSize
+            );
+            const assetName = hexToString(assetNameInHex);
+            const fingerprint = getFingerprint(policyId, assetNameInHex);
+
             return (
               <Card key={asset.asset} className="mb-2">
                 <Card.Header className="d-flex">
@@ -91,13 +99,20 @@ function Assets() {
                       <ContextAwareToggle eventKey={asset.asset} />
                     </div>
                     <div className="right">
-                      <Header asset={asset} />
+                      <Header
+                        assetName={assetName}
+                        quantity={asset.quantity}
+                        fingerprint={fingerprint}
+                      />
                     </div>
                   </div>
                 </Card.Header>
                 <Accordion.Collapse eventKey={asset.asset}>
                   <Card.Body>
-                    <ContextAwareContent asset={asset} eventKey={asset.asset} />
+                    <ContextAwareContent
+                      policyId={policyId}
+                      eventKey={asset.asset}
+                    />
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>

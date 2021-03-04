@@ -19,8 +19,8 @@ export function useAssets(): UseAssetsResponse {
   };
 }
 
-export function useAsset(assetId: string): UseAssetResponse {
-  const key = `${API_URL}/assets/${assetId}`;
+export function useAsset(policyId: string): UseAssetResponse {
+  const key = `${API_URL}/assets/${policyId}`;
   const { data, error } = useSWR(
     key,
     () =>

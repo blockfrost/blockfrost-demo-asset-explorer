@@ -1,18 +1,12 @@
 import React from "react";
-import { Asset } from "types";
-import { hexToString, getFingerprint } from "utils";
 
 interface Props {
-  asset: Asset;
+  assetName: string;
+  quantity: string;
+  fingerprint: string;
 }
 
-function Header({ asset }: Props) {
-  const policyIdSize = 56;
-  const assetNameInHex = asset.asset.slice(policyIdSize);
-  const policyId = asset.asset.substr(asset.asset.length - policyIdSize);
-  const assetName = hexToString(assetNameInHex);
-  const fingerprint = getFingerprint(policyId, assetNameInHex);
-
+function Header({ fingerprint, assetName, quantity }: Props) {
   return (
     <div className="d-flex">
       <div className="left">
@@ -24,7 +18,7 @@ function Header({ asset }: Props) {
           </div>
           <div className="d-flex align-items-end justify-content-between mg-b-5">
             <h5 className="tx-normal tx-rubik lh-2 mg-b-0 text-truncate">
-              {assetName}
+              {assetName === "" ? "N/A" : assetName}
             </h5>
           </div>
         </div>
@@ -50,7 +44,7 @@ function Header({ asset }: Props) {
           </div>
           <div className="d-flex align-items-end justify-content-end mg-b-5">
             <h5 className="tx-normal tx-rubik lh-2 mg-b-0 text-truncate">
-              {asset.quantity}
+              {quantity}
             </h5>
           </div>
         </div>

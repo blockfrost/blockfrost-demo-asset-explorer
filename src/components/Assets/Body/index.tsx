@@ -1,16 +1,14 @@
 import React from "react";
-import { Asset } from "types";
+import { useAsset } from "hooks/useAssets";
 
 interface Props {
-  asset: Asset;
+  policyId: string;
 }
 
-function Body({ asset }: Props) {
-  return (
-    <div className="wrapper">
-      <div>{asset.asset}</div>
-    </div>
-  );
+function Body({ policyId }: Props) {
+  const { asset, isAssetError, isAssetLoading } = useAsset(policyId);
+  console.log("asset", asset);
+  return <div className="wrapper">kaaamo</div>;
 }
 
 export { Body };
