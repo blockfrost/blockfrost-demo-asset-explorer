@@ -15,7 +15,7 @@ Login to the https://blockfrost.io. Create a project and get your api key.
 <br/>
 <br/>
 
-##### Run locally
+###### RUN LOCALLY
 
 Rename `.env.example` → `.env` and insert your API key.
 
