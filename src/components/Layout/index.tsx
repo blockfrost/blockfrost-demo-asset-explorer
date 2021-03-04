@@ -7,10 +7,7 @@ interface Props {
   title: string;
 }
 
-const MainLayout: FunctionComponent<Props> = ({
-  children,
-  title,
-}): JSX.Element => {
+const Layout: FunctionComponent<Props> = ({ children, title }): JSX.Element => {
   return (
     <>
       <Head>
@@ -23,4 +20,4 @@ const MainLayout: FunctionComponent<Props> = ({
   );
 };
 
-export { MainLayout };
+export { Layout };

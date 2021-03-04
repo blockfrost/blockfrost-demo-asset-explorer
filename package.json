@@ -11,9 +11,11 @@
     "type-check": "tsc --project tsconfig.json"
   },
   "dependencies": {
+    "@emurgo/cip14-js": "^2.0.0",
     "@types/react-select": "^4.0.4",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
+    "buffer": "^6.0.3",
     "dotenv": "^8.2.0",
     "jquery": "^3.5.1",
     "next": "10.0.6",
