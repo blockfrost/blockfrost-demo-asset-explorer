@@ -1,11 +1,11 @@
 import axios from "axios";
 import useSWR from "swr";
 import { getHeaders } from "utils";
-import { UseAssetsResponse, UseAssetResponse } from "types";
+import { UseAssetsResponse, UseAssetResponse, Order } from "types";
 import { API_URL } from "const";
 
-export function useAssets(page: number): UseAssetsResponse {
-  const key = `${API_URL}/assets?page=${page}`;
+export function useAssets(page: number, order: Order): UseAssetsResponse {
+  const key = `${API_URL}/assets?page=${page}&order=${order}`;
   const { data, error } = useSWR(key, () =>
     axios.get(key, { headers: getHeaders(process.env.PROJECT_ID) })
   );

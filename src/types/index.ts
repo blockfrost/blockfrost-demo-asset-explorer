@@ -24,3 +24,5 @@ export interface UseAssetResponse {
   isAssetLoading: boolean;
   isAssetError: boolean;
 }
+
+export type Order = "asc" | "desc";

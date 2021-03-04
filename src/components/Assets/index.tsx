@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Header } from "./Header";
 import { Body } from "./Body";
 import { hexToString, getFingerprint } from "utils";
+import { Order } from "types";
 import { useAssets } from "hooks/useAssets";
 import {
   Accordion,
@@ -10,13 +11,16 @@ import {
   useAccordionToggle,
 } from "react-bootstrap";
 import Skeleton from "react-loading-skeleton";
+import { ArrowDown, ArrowUp } from "react-feather";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 function Assets() {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(1);
+  const [order, setOrder] = useState<Order>("asc");
   const [hasNext, setHasNext] = useState(true);
   const { assets, isAssetsError, isAssetsLoading, hasNextPage } = useAssets(
-    page
+    page,
+    order
   );
 
   const ContextAwareToggle = ({
@@ -83,6 +87,14 @@ function Assets() {
           <h3>Cardano Assets</h3>
         </div>
         <div className="main-header-right">
+          <button
+            onClick={async () => {
+              setOrder(order === "desc" ? "asc" : "desc");
+            }}
+            className="btn btn-sm pd-x-15 btn-outline btn-uppercase mg-l-5"
+          >
+            ORDER BY AGE {order === "desc" ? <ArrowDown /> : <ArrowUp />}
+          </button>
           <button
             onClick={async () => {
               const nextPage = page - 1;
