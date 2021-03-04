@@ -3,8 +3,6 @@
 
 ## Blockfrost demo asset explorer
 
-##### Dev
-
 Make sure you have downloaded and installed [Node.js LTS](https://nodejs.org/en/download/), [Yarn](https://yarnpkg.com/lang/en/docs/install/) and git.
 
 <br/>
@@ -16,3 +14,13 @@ Login to the https://blockfrost.io. Create a project and get your api key.
 <img src="https://github.com/blockfrost/blockfrost-js/raw/master/public/screen.png">
 <br/>
 <br/>
+
+##### Run locally
+
+Rename `.env.example` → `.env` and insert your API key.
+
+```
+$ yarn
+$ yarn dev
+```
+
