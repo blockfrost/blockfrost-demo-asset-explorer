@@ -23,6 +23,8 @@ export interface UseAssetResponse {
   };
   isAssetLoading: boolean;
   isAssetError: boolean;
+  fetchDate: (initialMinTxHash: string) => Promise<void>;
+  date: number | null;
 }
 
 export interface UseAssetMinHistoryResponse {

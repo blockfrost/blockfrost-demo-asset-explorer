@@ -1,15 +1,62 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { format } from "date-fns";
 import { useAsset, useAssetMintHistory } from "hooks/useAssets";
+import Skeleton from "react-loading-skeleton";
 
 interface Props {
   assetId: string;
 }
 
 function Body({ assetId }: Props) {
-  const { asset, isAssetError, isAssetLoading } = useAsset(assetId);
+  const { asset, isAssetError, isAssetLoading, fetchDate, date } = useAsset(
+    assetId
+  );
   const { assetMintHistory } = useAssetMintHistory(assetId);
+
+  useEffect(() => {
+    if (!isAssetLoading && !isAssetError) {
+      fetchDate(asset.initial_mint_tx_hash);
+    }
+  }, [isAssetLoading, isAssetError]);
+
   return (
     <div className="wrapper">
+      <div className="header">
+        <div className="column column-name">
+          <div className="d-flex align-items-center justify-content-between mg-b-5">
+            <h6 className="tx-uppercase tx-10 tx-spacing-1 tx-color-02 tx-semibold mg-b-0">
+              Asset name
+            </h6>
+          </div>
+          <div className="d-flex align-items-end justify-content-end mg-b-5">
+            <h5 className="tx-normal tx-rubik lh-2 mg-b-0 text-truncate">
+              {isAssetLoading || !asset ? (
+                <Skeleton width={50} />
+              ) : (
+                asset.asset_name
+              )}
+            </h5>
+          </div>
+        </div>
+        <div className="column column-policy-id">
+          <div className="column column-name">
+            <div className="d-flex align-items-center justify-content-end mg-b-5">
+              <h6 className="tx-uppercase tx-10 tx-spacing-1 tx-color-02 tx-semibold mg-b-0">
+                Created
+              </h6>
+            </div>
+            <div className="d-flex align-items-end justify-content-end mg-b-5">
+              <h5 className="tx-normal tx-rubik lh-2 mg-b-0 text-truncate">
+                {!date ? (
+                  <Skeleton width={70} />
+                ) : (
+                  format(new Date(date * 1000), "MM/dd/yyyy hh:mm:ss")
+                )}
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="header">
         <div className="column column-policy-id">
           <div className="d-flex align-items-center justify-content-between mg-b-5">
@@ -19,24 +66,15 @@ function Body({ assetId }: Props) {
           </div>
           <div className="d-flex align-items-end justify-content-between mg-b-5">
             <h5 className="tx-normal tx-rubik lh-2 mg-b-0 text-truncate">
-              {asset ? asset.policy_id : ""}
-            </h5>
-          </div>
-        </div>
-        <div className="column column-name">
-          <div className="d-flex align-items-center justify-content-between mg-b-5">
-            <h6 className="tx-uppercase tx-10 tx-spacing-1 tx-color-02 tx-semibold mg-b-0">
-              Asset name
-            </h6>
-          </div>
-          <div className="d-flex align-items-end justify-content-end mg-b-5">
-            <h5 className="tx-normal tx-rubik lh-2 mg-b-0 text-truncate">
-              {asset ? asset.asset_name : ""}
+              {isAssetLoading || !asset ? (
+                <Skeleton width={500} />
+              ) : (
+                asset.policy_id
+              )}
             </h5>
           </div>
         </div>
       </div>
-      {isAssetLoading && "loading"}
       {isAssetError && "error"}
       {!isAssetError && !isAssetLoading && assetMintHistory && (
         <div className="table py-4">
@@ -79,11 +117,12 @@ function Body({ assetId }: Props) {
       )}
       <style jsx>{`
         .wrapper {
-          min-height: 200px;
+          min-height: 250px;
           padding: 10px 35px;
         }
         .header {
           display: flex;
+          margin-bottom: 20px;
           justify-content: space-between;
         }
       `}</style>

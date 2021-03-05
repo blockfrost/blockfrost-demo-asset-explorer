@@ -1,3 +1,4 @@
+import { useState } from "react";
 import axios from "axios";
 import useSWR from "swr";
 import { getHeaders } from "utils";
@@ -19,6 +20,7 @@ export function useAssets(page: number, order: Order): UseAssetsResponse {
     const result = await axios.get(`${API_URL}/assets?page=${nextPage}`, {
       headers: getHeaders(process.env.PROJECT_ID),
     });
+
     return result.data.length === 100;
   };
 
@@ -31,6 +33,19 @@ export function useAssets(page: number, order: Order): UseAssetsResponse {
 }
 
 export function useAsset(policyId: string): UseAssetResponse {
+  const [date, setDate] = useState<string | null>(null);
+
+  const fetchDate = async (initialMinTxHash: string) => {
+    const resultTxs = await axios.get(`${API_URL}/txs/${initialMinTxHash}`, {
+      headers: getHeaders(process.env.PROJECT_ID),
+    });
+    const blockId = resultTxs.data.block;
+    const resultBlock = await axios.get(`${API_URL}/blocks/${blockId}`, {
+      headers: getHeaders(process.env.PROJECT_ID),
+    });
+    setDate(resultBlock.data.time);
+  };
+
   const key = `${API_URL}/assets/${policyId}`;
   const { data, error } = useSWR(
     key,
@@ -45,6 +60,8 @@ export function useAsset(policyId: string): UseAssetResponse {
     asset: data?.data,
     isAssetLoading: !error && !data,
     isAssetError: error,
+    fetchDate,
+    date,
   };
 }
 
