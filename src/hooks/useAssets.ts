@@ -33,7 +33,7 @@ export function useAssets(page: number, order: Order): UseAssetsResponse {
 }
 
 export function useAsset(policyId: string): UseAssetResponse {
-  const [date, setDate] = useState<string | null>(null);
+  const [date, setDate] = useState<number | null>(null);
 
   const fetchDate = async (initialMinTxHash: string) => {
     const resultTxs = await axios.get(`${API_URL}/txs/${initialMinTxHash}`, {
