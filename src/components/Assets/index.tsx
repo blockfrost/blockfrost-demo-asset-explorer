@@ -90,6 +90,7 @@ function Assets() {
           <button
             onClick={async () => {
               setOrder(order === "desc" ? "asc" : "desc");
+              setPage(1);
             }}
             className="btn btn-sm pd-x-15 btn-outline btn-uppercase mg-l-5"
           >
