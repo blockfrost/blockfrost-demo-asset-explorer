@@ -17,7 +17,6 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 function Assets() {
   const [page, setPage] = useState<number>(1);
   const [order, setOrder] = useState<Order>("asc");
-  const [hasNext, setHasNext] = useState(true);
   const { assets, isAssetsError, isAssetsLoading, hasNextPage } = useAssets(
     page,
     order
@@ -98,10 +97,7 @@ function Assets() {
           </button>
           <button
             onClick={async () => {
-              const nextPage = page - 1;
-              const hasNext = await hasNextPage(nextPage);
-              setHasNext(hasNext);
-              setPage(nextPage);
+              setPage(page - 1);
             }}
             disabled={page === 1}
             className="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5"
@@ -110,12 +106,9 @@ function Assets() {
           </button>
           <button
             onClick={async () => {
-              const nextPage = page + 1;
-              const hasNext = await hasNextPage(nextPage);
-              setHasNext(hasNext);
-              setPage(nextPage);
+              setPage(page + 1);
             }}
-            disabled={!hasNext}
+            disabled={!hasNextPage}
             className="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5"
           >
             next page

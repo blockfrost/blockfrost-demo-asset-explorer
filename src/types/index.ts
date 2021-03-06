@@ -9,7 +9,7 @@ export interface UseAssetsResponse {
   }[];
   isAssetsLoading: boolean;
   isAssetsError: boolean;
-  hasNextPage: (nextPage: number) => Promise<boolean>;
+  hasNextPage: boolean;
 }
 
 export interface UseAssetResponse {
@@ -20,11 +20,10 @@ export interface UseAssetResponse {
     metadata: string;
     policy_id: string;
     quantity: string;
+    time: number;
   };
   isAssetLoading: boolean;
   isAssetError: boolean;
-  fetchDate: (initialMinTxHash: string) => Promise<void>;
-  date: number | null;
 }
 
 export interface UseAssetMinHistoryResponse {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { format } from "date-fns";
 import { useAsset, useAssetMintHistory } from "hooks/useAssets";
 import Skeleton from "react-loading-skeleton";
@@ -8,16 +8,8 @@ interface Props {
 }
 
 function Body({ assetId }: Props) {
-  const { asset, isAssetError, isAssetLoading, fetchDate, date } = useAsset(
-    assetId
-  );
+  const { asset, isAssetError, isAssetLoading } = useAsset(assetId);
   const { assetMintHistory } = useAssetMintHistory(assetId);
-
-  useEffect(() => {
-    if (!isAssetLoading && !isAssetError) {
-      fetchDate(asset.initial_mint_tx_hash);
-    }
-  }, [isAssetLoading, isAssetError]);
 
   return (
     <div className="wrapper">
@@ -28,7 +20,7 @@ function Body({ assetId }: Props) {
               Asset name
             </h6>
           </div>
-          <div className="d-flex align-items-end justify-content-end mg-b-5">
+          <div className="d-flex align-items-end justify-content-start mg-b-5">
             <h5 className="tx-normal tx-rubik lh-2 mg-b-0 text-truncate">
               {isAssetLoading || !asset ? (
                 <Skeleton width={50} />
@@ -47,10 +39,10 @@ function Body({ assetId }: Props) {
             </div>
             <div className="d-flex align-items-end justify-content-end mg-b-5">
               <h5 className="tx-normal tx-rubik lh-2 mg-b-0 text-truncate">
-                {!date ? (
-                  <Skeleton width={70} />
+                {!asset ? (
+                  <Skeleton width={166} />
                 ) : (
-                  format(new Date(date * 1000), "MM/dd/yyyy hh:mm:ss")
+                  format(new Date(asset.time * 1000), "MM/dd/yyyy hh:mm:ss")
                 )}
               </h5>
             </div>
