@@ -1,11 +1,12 @@
 <img src="https://blockfrost.io/images/logo.svg" width="500">
-<br>
 
-## Blockfrost demo asset explorer
+
+
+## Blockfrost demo asset explorer - https://cardano-tokens.com
 
 Make sure you have downloaded and installed [Node.js LTS](https://nodejs.org/en/download/), [Yarn](https://yarnpkg.com/lang/en/docs/install/) and git.
 
-<br/>
+
 
 ###### BEFORE YOU START
 
