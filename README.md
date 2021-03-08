@@ -20,8 +20,29 @@ Login to the https://blockfrost.io. Create a project and get your api key.
 
 Rename `.env.example` → `.env` and insert your API key.
 
-```
+```bash
 $ yarn
 $ yarn dev
 ```
 
+Go to http://localhost:3000/.
+
+
+###### RUN INSIDE DOCKER
+
+Rename `.env.example` → `.env` and insert your API key.
+
+
+Build the docker image.
+
+```bash
+$ docker build -t blockfrost-demo-asset-explorer .
+```
+
+Run the application container.
+
+```bash
+$ docker run -dp 3000:3000 blockfrost-demo-asset-explorer:latest
+```
+
+Go to http://localhost:3000/.
