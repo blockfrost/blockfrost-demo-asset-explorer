@@ -6,11 +6,11 @@
 
 This repository provides a demo application build on top of *Blockfrost.io*, Cardano API-as-a-Service.
 
-You can see the demo itself running on [cardano-tokens.com](https://cardano-tokens.com).
+You can see the demo itself running on [cardano-tokens.com](https://cardano-tokens.com) or you can run your own if you do not trust our funny accents.
 
 ## Before you start
 
-Make sure you have downloaded and installed [Node.js LTS](https://nodejs.org/en/download/), [Yarn](https://yarnpkg.com/lang/en/docs/install/) and git or you can run your own or just run `nix-shell` if you are using NixOS.
+Make sure you have downloaded and installed [Node.js LTS](https://nodejs.org/en/download/), [Yarn](https://yarnpkg.com/lang/en/docs/install/) and git or just run `nix-shell` if you are using NixOS.
 
 Login to the [blockfrost.io](https://blockfrost.io). Create a project and get your API key.
 
