@@ -3,7 +3,7 @@ with import <nixpkgs> {};
 stdenv.mkDerivation {
   name = "blockfrost-demo-asset-explorer";
   buildInputs = [
-    nodejs-12_x
+    nodejs-14_x
     yarn
   ];
   shellHook = ''
