@@ -1,24 +1,27 @@
-<img src="https://blockfrost.io/images/logo.svg" width="500">
 
 
+<img src="https://blockfrost.io/images/logo.svg" align="left" height="30" /><br>
 
-## Blockfrost demo asset explorer - https://cardano-tokens.com
+# Demo: Asset explorer
 
-Make sure you have downloaded and installed [Node.js LTS](https://nodejs.org/en/download/), [Yarn](https://yarnpkg.com/lang/en/docs/install/) and git.
+This repository provides a demo application build on top of *Blockfrost.io*, Cardano API-as-a-Service.
 
+You can see the demo itself running on [cardano-tokens.com](https://cardano-tokens.com).
 
+## Before you start
 
-###### BEFORE YOU START
+Make sure you have downloaded and installed [Node.js LTS](https://nodejs.org/en/download/), [Yarn](https://yarnpkg.com/lang/en/docs/install/) and git or you can run your own or just run `nix-shell` if you are using NixOS.
 
-Login to the https://blockfrost.io. Create a project and get your api key.
+Login to the [blockfrost.io](https://blockfrost.io). Create a project and get your API key.
 
 <img src="https://github.com/blockfrost/blockfrost-js/raw/master/public/screen.png">
 <br/>
 <br/>
 
-###### RUN LOCALLY
+Once you have it, rename `.env.example` → `.env` and insert your API key.
 
-Rename `.env.example` → `.env` and insert your API key.
+
+## Run locally
 
 ```bash
 $ yarn
@@ -28,10 +31,7 @@ $ yarn dev
 Go to http://localhost:3000/.
 
 
-###### RUN INSIDE DOCKER
-
-Rename `.env.example` → `.env` and insert your API key.
-
+## Run inside docker
 
 Build the docker image.
 
@@ -45,4 +45,4 @@ Run the application container.
 $ docker run -dp 3000:3000 blockfrost-demo-asset-explorer:latest
 ```
 
-Go to http://localhost:3000/.
+Go to http://localhost:3000/ and enjoy.
