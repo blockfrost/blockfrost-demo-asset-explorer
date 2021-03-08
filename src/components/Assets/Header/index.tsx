@@ -36,7 +36,7 @@ function Header({ fingerprint, assetName, quantity }: Props) {
         </div>
       </div>
       <div className="right">
-        <div className="column column-name">
+        <div className="column">
           <div className="d-flex align-items-center justify-content-end mg-b-5">
             <h6 className="tx-uppercase tx-10 tx-spacing-1 tx-color-02 tx-semibold mg-b-0">
               Quantity
@@ -57,8 +57,9 @@ function Header({ fingerprint, assetName, quantity }: Props) {
           justify-content: space-between;
         }
         .column-name {
-          min-width: 180px;
+          min-width: 200px;
           max-width: 200px;
+          margin-right: 20px;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;

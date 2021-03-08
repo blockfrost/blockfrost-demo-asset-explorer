@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Header } from "./Header";
 import { Body } from "./Body";
+import { Buttons } from "./Buttons";
 import { hexToString, getFingerprint } from "utils";
 import { Order } from "types";
 import { useAssets } from "hooks/useAssets";
@@ -11,7 +12,6 @@ import {
   useAccordionToggle,
 } from "react-bootstrap";
 import Skeleton from "react-loading-skeleton";
-import { ArrowDown, ArrowUp } from "react-feather";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 function Assets() {
@@ -85,35 +85,13 @@ function Assets() {
         <div className="main-header-left">
           <h3>Cardano Assets</h3>
         </div>
-        <div className="main-header-right">
-          <button
-            onClick={async () => {
-              setOrder(order === "desc" ? "asc" : "desc");
-              setPage(1);
-            }}
-            className="btn btn-sm pd-x-15 btn-outline btn-uppercase mg-l-5"
-          >
-            ORDER BY AGE {order === "desc" ? <ArrowDown /> : <ArrowUp />}
-          </button>
-          <button
-            onClick={async () => {
-              setPage(page - 1);
-            }}
-            disabled={page === 1}
-            className="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5"
-          >
-            previous page
-          </button>
-          <button
-            onClick={async () => {
-              setPage(page + 1);
-            }}
-            disabled={!hasNextPage}
-            className="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5"
-          >
-            next page
-          </button>
-        </div>
+        <Buttons
+          page={page}
+          setPage={setPage}
+          setOrder={setOrder}
+          order={order}
+          hasNextPage={hasNextPage}
+        />
       </div>
       <Accordion>
         {isAssetsLoading && (
@@ -160,9 +138,23 @@ function Assets() {
             );
           })}
       </Accordion>
+      <div className="bottom-header-right p-3">
+        <Buttons
+          page={page}
+          setPage={setPage}
+          setOrder={setOrder}
+          order={order}
+          hasNextPage={hasNextPage}
+        />
+      </div>
       <style jsx>{`
         .wrapper {
           margin: 50px 0;
+        }
+        .bottom-header-right {
+          display: flex;
+          flex: 1;
+          justify-content: flex-end;
         }
         .main-header {
           display: flex;

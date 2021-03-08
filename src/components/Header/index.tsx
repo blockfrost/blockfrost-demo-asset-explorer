@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar } from "react-bootstrap";
 import Link from "next/link";
 import { Menu as MenuIcon } from "react-feather";
-import { FaHashtag, FaGithub } from "react-icons/fa";
+import { FaHashtag } from "react-icons/fa";
 
 function Header() {
   return (
@@ -22,8 +22,7 @@ function Header() {
           <div className="text">Demo Asset Explorer</div>
         </div>
       </Navbar>
-
-      <div className="navbar-right" style={{ width: 400 }}>
+      <div className="navbar-right right" style={{ width: 400 }}>
         <a href="https://docs.blockfrost.io/" target="_blank" rel="noreferrer">
           <button className="btn btn-sm pd-x-15 btn-uppercase mg-l-5 d-flex">
             <div className="mr-2">
@@ -32,13 +31,6 @@ function Header() {
             documentation
           </button>
         </a>
-        <a
-          href="https://github.com/blockfrost/blockfrost-demo-asset-explorer"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <FaGithub size={30} />
-        </a>
       </div>
       <style jsx>{`
         .title {
@@ -46,6 +38,9 @@ function Header() {
           padding-left: 20px;
           display: flex;
           align-items: center;
+        }
+        .right {
+          margin-right: 30px;
         }
       `}</style>
     </header>
