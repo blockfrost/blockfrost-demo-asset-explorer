@@ -104,9 +104,7 @@ function Assets() {
           assets.map((asset) => {
             const policyIdSize = 56;
             const assetNameInHex = asset.asset.slice(policyIdSize);
-            const policyId = asset.asset.substr(
-              asset.asset.length - policyIdSize
-            );
+            const policyId = asset.asset.substr(0, policyIdSize);
             const assetName = hexToString(assetNameInHex);
             const fingerprint = getFingerprint(policyId, assetNameInHex);
 
