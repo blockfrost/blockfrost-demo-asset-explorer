@@ -1,10 +1,8 @@
-
-
 <img src="https://blockfrost.io/images/logo.svg" align="left" height="30" /><br>
 
 ## Demo: Asset explorer
 
-This repository provides a demo application build on top of *Blockfrost.io*, Cardano API-as-a-Service.
+This repository provides a demo application build on top of _Blockfrost.io_, Cardano API-as-a-Service.
 
 You can see the demo itself running on [cardano-tokens.com](https://cardano-tokens.com) or you can run your own if you do not trust our funny accents.
 
@@ -20,7 +18,6 @@ Login to the [blockfrost.io](https://blockfrost.io). Create a project and get yo
 
 Once you have it, rename `.env.example` → `.env` and insert your API key.
 
-
 ### Run locally
 
 ```bash
@@ -29,7 +26,6 @@ $ yarn dev
 ```
 
 Go to http://localhost:3000/.
-
 
 ### Run inside docker
 
