@@ -1,28 +1,15 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import axios from "axios";
-import { getHeaders } from "utils";
-import { API_URL } from "const";
+import { NextApiResponse } from "next";
+import { blockfrostAPI } from "utils/blockfrostAPI";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (req: { query: { id: string } }, res: NextApiResponse) => {
   try {
-    const resultAsset = await axios.get(`${API_URL}/assets/${req.query.id}`, {
-      headers: getHeaders(process.env.PROJECT_ID),
-    });
-
-    const resultTxs = await axios.get(
-      `${API_URL}/txs/${resultAsset.data.initial_mint_tx_hash}`,
-      { headers: getHeaders(process.env.PROJECT_ID) }
-    );
-
-    const blockId = resultTxs.data.block;
-
-    const resultBlock = await axios.get(`${API_URL}/blocks/${blockId}`, {
-      headers: getHeaders(process.env.PROJECT_ID),
-    });
+    const resultAsset = await blockfrostAPI.assetsById(req.query.id);
+    const resultTxs = await blockfrostAPI.txs(resultAsset.initial_mint_tx_hash);
+    const resultBlock = await blockfrostAPI.blocks(resultTxs.block);
 
     return res.send({
-      ...resultAsset.data,
-      time: resultBlock.data.time,
+      ...resultAsset,
+      time: resultBlock.time,
     });
   } catch (error) {
     console.log(error);

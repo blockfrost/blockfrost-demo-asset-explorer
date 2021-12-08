@@ -1,7 +1,3 @@
-export interface Headers {
-  project_id: string;
-}
-
 export interface UseAssetsResponse {
   assets: {
     asset: string;
