@@ -1,30 +1,28 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import axios from "axios";
-import { getHeaders } from "utils";
-import { API_URL } from "const";
+import { NextApiResponse } from "next";
+import { blockfrostAPI } from "utils/blockfrostAPI";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (
+  req: {
+    query: { order: "asc" | "desc" | undefined; id: string; page: string };
+  },
+  res: NextApiResponse
+) => {
   try {
-    const {
-      data,
-    } = await axios.get(
-      `${API_URL}/assets?page=${req.query.page}&order=${req.query.order}`,
-      { headers: getHeaders(process.env.PROJECT_ID) }
-    );
+    const assets = await blockfrostAPI.assets({
+      order: req.query.order,
+    });
 
-    if (typeof req.query.page === "string") {
-      const resultNextPage = await axios.get(
-        `${API_URL}/assets?page=${parseInt(req.query.page) + 1}`,
-        { headers: getHeaders(process.env.PROJECT_ID) }
-      );
+    const assetsNexPage = await blockfrostAPI.assets({
+      order: req.query.order,
+      page: parseInt(req.query.page) + 1,
+    });
 
-      return res.send({
-        assets: data,
-        hasNextPage: resultNextPage.data.length !== 0,
-      });
-    }
+    return res.send({
+      assets,
+      hasNextPage: assetsNexPage.length !== 0,
+    });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).send({ error: "Cannot load the data" });
   }
 };

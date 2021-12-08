@@ -1,17 +1,15 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import axios from "axios";
-import { getHeaders } from "utils";
-import { API_URL } from "const";
+import { NextApiResponse } from "next";
+import { blockfrostAPI } from "utils/blockfrostAPI";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (
+  req: { query: { policyId: string } },
+  res: NextApiResponse
+) => {
   try {
-    const resultAsset = await axios.get(
-      `${API_URL}/assets/${req.query.policyId}/history`,
-      { headers: getHeaders(process.env.PROJECT_ID) }
-    );
-    return res.send(resultAsset.data);
+    const assetHistory = await blockfrostAPI.assetsHistory(req.query.policyId);
+    return res.send(assetHistory);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).send({ error: "Cannot load the data" });
   }
 };

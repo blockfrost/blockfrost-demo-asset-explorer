@@ -1,15 +1,4 @@
-import { Headers } from "types";
 import EmurgoCip from "@emurgo/cip14-js";
-
-export const getHeaders = (projectId?: string): Headers | null => {
-  if (!projectId) {
-    return null;
-  }
-
-  return {
-    project_id: projectId,
-  };
-};
 
 export const hexToString = (input: string) => {
   const hex = input.toString();
