@@ -3,16 +3,16 @@ import { blockfrostAPI } from "utils/blockfrostAPI";
 
 export default async (req: { query: { id: string } }, res: NextApiResponse) => {
   try {
-    const resultAsset = await blockfrostAPI.assetsById(req.query.id);
-    const resultTxs = await blockfrostAPI.txs(resultAsset.initial_mint_tx_hash);
-    const resultBlock = await blockfrostAPI.blocks(resultTxs.block);
+    const asset = await blockfrostAPI.assetsById(req.query.id);
+    const tx = await blockfrostAPI.txs(asset.initial_mint_tx_hash);
+    const block = await blockfrostAPI.blocks(tx.block);
 
     return res.send({
-      ...resultAsset,
-      time: resultBlock.time,
+      ...asset,
+      time: block.time,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).send({ error: "Cannot load the data" });
   }
 };

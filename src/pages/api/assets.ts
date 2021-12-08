@@ -12,17 +12,17 @@ export default async (
       order: req.query.order,
     });
 
-    const resultNextPage = await blockfrostAPI.assets({
+    const assetsNexPage = await blockfrostAPI.assets({
       order: req.query.order,
       page: parseInt(req.query.page) + 1,
     });
 
     return res.send({
       assets,
-      hasNextPage: resultNextPage.length !== 0,
+      hasNextPage: assetsNexPage.length !== 0,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).send({ error: "Cannot load the data" });
   }
 };

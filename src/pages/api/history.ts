@@ -6,10 +6,10 @@ export default async (
   res: NextApiResponse
 ) => {
   try {
-    const resultAsset = await blockfrostAPI.assetsHistory(req.query.policyId);
-    return res.send(resultAsset);
+    const assetHistory = await blockfrostAPI.assetsHistory(req.query.policyId);
+    return res.send(assetHistory);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).send({ error: "Cannot load the data" });
   }
 };
