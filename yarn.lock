@@ -510,15 +510,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@blockfrost/blockfrost-js@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "@blockfrost/blockfrost-js@npm:3.0.2"
+"@blockfrost/blockfrost-js@npm:4.0.0":
+  version: 4.0.0
+  resolution: "@blockfrost/blockfrost-js@npm:4.0.0"
   dependencies:
     "@emurgo/cardano-serialization-lib-nodejs": ^9.1.2
-    "@emurgo/cip14-js": ^2
+    "@emurgo/cip14-js": 3.0.1
     form-data: ^4.0.0
     got: ^11.8.3
-  checksum: c494c6c67a4f8b7ba0acc8fb9605fe10cc43516eeb82b6279b61f6a2af58284831e1f2185f49c0ec297db3a46eaae75f45f980912128790971f017b89ce38951
+  checksum: b89381441d819829727e6de3ccdc74c0f06d05313b1bd4dc772361e1ff8198ca372e54343a6de2e40299fced3a7440259dc1d2fac55ea7214cf4bbf6eec79194
   languageName: node
   linkType: hard
 
@@ -527,7 +527,7 @@ __metadata:
   resolution: "@blockfrost/demo-asset-explorer@workspace:."
   dependencies:
     "@babel/core": ^7.12.10
-    "@blockfrost/blockfrost-js": ^3.0.2
+    "@blockfrost/blockfrost-js": 4.0.0
     "@emurgo/cip14-js": ^2.0.0
     "@testing-library/jest-dom": 5.11.9
     "@testing-library/react": ^11.2.2
@@ -715,7 +715,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emurgo/cip14-js@npm:^2, @emurgo/cip14-js@npm:^2.0.0":
+"@emurgo/cip14-js@npm:3.0.1":
+  version: 3.0.1
+  resolution: "@emurgo/cip14-js@npm:3.0.1"
+  dependencies:
+    bech32: 2.0.0
+    blake2b: 2.1.3
+  checksum: c7a20ac92af0188612a7c3c0ea80c13e0c5c1c9c4e5e02d3284908e99eee385475bad98c0dd718c49ad3a89ca4b086009aa667f71bd3b214eedbdda0e4a138ed
+  languageName: node
+  linkType: hard
+
+"@emurgo/cip14-js@npm:^2.0.0":
   version: 2.0.0
   resolution: "@emurgo/cip14-js@npm:2.0.0"
   dependencies:
